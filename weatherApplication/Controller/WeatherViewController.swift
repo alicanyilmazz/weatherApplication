@@ -60,6 +60,10 @@ class WeatherViewController: UIViewController , UITextFieldDelegate {
         }
         searchTextField.text = ""
     }
+    
+    func didUpdateWeather(weather : WeatherModel){
+        print(weather.temperatureString)
+    }
 }
 
 // we can have multiple text fields or triggering the same methods.

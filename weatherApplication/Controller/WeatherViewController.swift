@@ -7,9 +7,8 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController , UITextFieldDelegate {
+class WeatherViewController: UIViewController , UITextFieldDelegate , WeatherManagerDelegate {
   
-    
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
@@ -20,7 +19,7 @@ class WeatherViewController: UIViewController , UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // here what this line of this code is saying the text field should report back to our view controller.
+        weatherManager.delegate = self
         searchTextField.delegate = self // Remember that 'self' refers to the current view controller.
     }
 
@@ -61,9 +60,17 @@ class WeatherViewController: UIViewController , UITextFieldDelegate {
         searchTextField.text = ""
     }
     
-    func didUpdateWeather(weather : WeatherModel){
-        print(weather.temperatureString)
+    func didUpdateWeather(_ weatherManager : WeatherManager , weather : WeatherModel){
+        DispatchQueue.main.sync {
+            self.temperatureLabel.text = weather.temperatureString
+            conditionImageView.image = UIImage(systemName: weather.conditionName)
+        }
+        
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
     }
 }
 
-// we can have multiple text fields or triggering the same methods.
+

@@ -1,4 +1,4 @@
-# weatherApplication Features
+## weatherApplication Features
 
 > MVC Design Pattern
  

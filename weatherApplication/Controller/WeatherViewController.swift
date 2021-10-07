@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController , UITextFieldDelegate , WeatherManagerDelegate {
+class WeatherViewController: UIViewController {
   
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -22,8 +22,11 @@ class WeatherViewController: UIViewController , UITextFieldDelegate , WeatherMan
         weatherManager.delegate = self
         searchTextField.delegate = self // Remember that 'self' refers to the current view controller.
     }
+}
 
 
+// MARK: - UITextFieldDelegate
+extension WeatherViewController : UITextFieldDelegate{
     @IBAction func searchPressed(_ sender: UIButton) {
         // if we tap into this method code endEditing and set it true , then it will tell the search field that we're done with editing and you can dismiss the keyboard.
         searchTextField.endEditing(true)
@@ -59,7 +62,10 @@ class WeatherViewController: UIViewController , UITextFieldDelegate , WeatherMan
         }
         searchTextField.text = ""
     }
-    
+}
+
+// MARK: - WeatherManagerDelegate
+extension WeatherViewController : WeatherManagerDelegate{
     func didUpdateWeather(_ weatherManager : WeatherManager , weather : WeatherModel){
         DispatchQueue.main.sync {
             self.temperatureLabel.text = weather.temperatureString
@@ -72,5 +78,3 @@ class WeatherViewController: UIViewController , UITextFieldDelegate , WeatherMan
         print(error)
     }
 }
-
-

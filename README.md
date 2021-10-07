@@ -1,10 +1,10 @@
 ## weatherApplication Features
 
-> MVC Design Pattern
+> MVC design pattern.
  
-> Ligth and Dark Mode Support
+> Ligth and dark mode support.
  
-> City Search to Find Out The Weather
+> City search to find out the weather.
  
 > Find location button to learn the weather conditions of your current location via gps information.
 
